@@ -1,0 +1,27 @@
+{
+  "name": "bitcoin-dashboard",
+  "version": "1.0.0",
+  "description": "A Bitcoin Dashboard that provides the lastest price of Bitcoin in Canadian dollars, US dollars and Chilean pesos",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axiomzen/cc-Bonnie-Han-Bitcoin.git"
+  },
+  "keywords": [
+    "bitcoin",
+    "dashboard"
+  ],
+  "author": "Bonnie Han",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/axiomzen/cc-Bonnie-Han-Bitcoin/issues"
+  },
+  "homepage": "https://github.com/axiomzen/cc-Bonnie-Han-Bitcoin",
+  "devDependencies": {
+    "express": "^4.12.3",
+    "request": "^2.55.0"
+  }
+}

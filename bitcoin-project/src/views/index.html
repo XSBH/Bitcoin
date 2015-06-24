@@ -1,0 +1,56 @@
+<html ng-app="bitcon">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bonnie-Han-Bitcoin</title>
+	<link rel="stylesheet" type="text/css" href="main.css" /> 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script type="text/javascript">
+		var myApp = angular.module("bitcon", []);
+		myApp.controller("bitconCtrl", function($scope, $http, $timeout) {
+			$scope.count = 0;
+			$scope.updating = false;
+			var retrieveSuccess = function(data) {
+				console.log("data retrieved from the server successfully, count=" + $scope.count);
+				$scope.prices = data;
+				$timeout(getPrices, 5000);
+				$scope.updating = false;
+			};
+			var getPrices = function() {
+				$scope.updating = true;
+				$http.get("/bitcon")
+				.success(function(data) {retrieveSuccess(data);})
+				.error(function(data) {$timeout(getPrices, 5000);});
+				$scope.count ++;
+			};
+			getPrices();
+		  });
+	</script>
+</head>
+
+<body ng-controller="bitconCtrl">
+	<div id="top-div">
+		<div id="container">
+			<div id="titlecontainer"><h1>BITCOIN</h1></div>
+			<div id="spinnercontainer" ng-show="updating">updating ...</div>
+		</div>
+	</div>
+	<div id="bottom-div">
+		<table>
+			 <tr>
+				<td class="label">CAD </td>
+				<td class="value">{{prices.CAD}}</td>
+			</tr>
+			<tr>
+				<td class="label">USD </td>
+				<td class="value">{{prices.USD}}</td>
+			</tr>
+			<tr>
+				<td class="label">CLP</td>
+				<td class="value">{{prices.CLP}}</td>
+			</tr>
+		</table>
+	</div>
+	<div id="time-div">{{prices.time | date:'HH:mm:ss'}}</div>
+</body>
+
+</html>
